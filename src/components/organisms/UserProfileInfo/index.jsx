@@ -23,7 +23,7 @@ const UserProfileInfo = () => {
   });
 
   const handleLogOut = (path) => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     history.push(path);
   };
 
