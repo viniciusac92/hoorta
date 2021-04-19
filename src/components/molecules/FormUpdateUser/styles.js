@@ -4,6 +4,7 @@ export const StyledForm = styled.form`
   input {
     margin: 8px 0;
     width: 100%;
+    overflow-y: scroll;
   }
 
   button {
@@ -25,5 +26,9 @@ export const StyledForm = styled.form`
   .addressContainer p:nth-child(1),
   .ccContainer p:nth-child(1) {
     margin-bottom: 10px;
+  }
+
+  p {
+    height: auto;
   }
 `;

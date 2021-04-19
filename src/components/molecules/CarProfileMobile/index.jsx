@@ -7,6 +7,7 @@ import Left from "../../../assets/images/icons/left.png";
 import IconEdit from "../../../assets/images/icons/editPencil.svg";
 import CardInfoUserProfile from "../../atoms/CardInfoUserProfile";
 import { useHistory } from "react-router-dom";
+import ModalUser from "../../organisms/ModalUser";
 
 const CardProfileMobile = () => {
   const { userData } = useData();
@@ -32,8 +33,11 @@ const CardProfileMobile = () => {
         <CardStyled.Background>
           <CardStyled.Title>
             <Text size="mediumPlus" weigth="semiBold">
-              Junia - 26
+              {userData.name} - {userData.age}
             </Text>
+            <CardStyled.Icon>
+              <ModalUser />
+            </CardStyled.Icon>
           </CardStyled.Title>
         </CardStyled.Background>
       </CardStyled>

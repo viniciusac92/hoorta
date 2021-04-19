@@ -8,7 +8,6 @@ export const ProductsListStyled = styled.div`
   height: auto;
   max-width: 100%;
   margin: 30px 20px;
-  overflow: hidden;
 
   > div {
     margin-bottom: 20px;
@@ -72,7 +71,6 @@ export const ContainerInfoStyled = styled.div`
   flex-direction: column;
   position: relative;
   min-height: 110px;
-  overflow: hidden;
   margin: 5px;
   > p {
     margin: 5px 0px;
@@ -90,6 +88,9 @@ export const ContainerInfoStyled = styled.div`
     > p {
       margin: 20px 0px;
       overflow-y: scroll;
+      ::-webkit-scrollbar {
+        width: 0;
+      }
       height: 60px;
     }
 

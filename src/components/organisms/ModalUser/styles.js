@@ -7,33 +7,38 @@ export const StyledModal = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   width: 80%;
   position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  padding: 2rem;
+  padding: 15px;
   outline: none;
-
+  height: 80vh;
   background-color: ${color.white};
   box-shadow: ${shadow};
   border-radius: ${radius};
+  overflow-y: scroll;
 
+  ::-webkit-scrollbar {
+    width: 0;
+  }
   .headerContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: center;
     padding-bottom: 10px;
+
+    > p {
+      margin-top: 15px;
+    }
   }
 
   @media screen and (min-width: 800px) {
     max-width: 600px;
+    height: 80vh;
   }
 `;
 
 export const EditButton = styled.button`
   background: none;
-  display: flex;
   height: 100%;
+  float: right;
 `;
