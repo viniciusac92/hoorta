@@ -60,7 +60,6 @@ const FormUpdateUser = () => {
       console.log(e);
     }
   };
-  console.log(userData);
   return (
     <StyledForm onSubmit={handleSubmit(handleForm)}>
       <Input
@@ -87,91 +86,90 @@ const FormUpdateUser = () => {
         {...register("phone")}
       />
       <p>{errors.phone?.message}</p>
-      <div className="addressContainer">
-        <Text weigth="medium" size="small">
-          Endereço
-        </Text>
-        <Input
-          type="text"
-          ref={ref}
-          placeholder={userData.address.road || "Endereço"}
-          size="large"
-          {...register("road")}
-        />
-        <p>{errors.address?.message}</p>
-        <Input
-          type="text"
-          ref={ref}
-          placeholder={userData.address.number || "Número"}
-          size="large"
-          {...register("number")}
-        />
-        <p>{errors.number?.message}</p>
-        <Input
-          type="text"
-          ref={ref}
-          placeholder={userData.address.city || "Cidade"}
-          size="large"
-          {...register("city")}
-        />
-        <p>{errors.city?.message}</p>
-        <Input
-          type="text"
-          ref={ref}
-          placeholder={userData.address.state || "Estado"}
-          size="large"
-          {...register("state")}
-        />
-        <p>{errors.state?.message}</p>
-        <Input
-          type="text"
-          ref={ref}
-          placeholder={userData.address.cep || "CEP"}
-          size="large"
-          {...register("cep")}
-        />
-        <p>{errors.cep?.message}</p>
-      </div>
-      <div className="ccContainer">
-        <Text className="subtitle" weigth="medium" size="small">
-          Dados do Cartão
-        </Text>
-        <Input
-          ref={ref}
-          type="number"
-          placeholder={
-            // `XXXX XXXX XXXX ${userData.cc.cc_number.slice(-4)}` ||
-            "Número"
-          }
-          size="large"
-          {...register("cc_number")}
-        />
-        <p>{errors.cc_number?.message}</p>
-        <Input
-          type="text"
-          ref={ref}
-          placeholder={userData.cc.expiration || "Validade"}
-          size="large"
-          {...register("expiration")}
-        />
-        <p>{errors.expiration?.message}</p>
-        <Input
-          type="number"
-          ref={ref}
-          placeholder={userData.cc.cvv || "CVV"}
-          size="large"
-          {...register("cvv")}
-        />
-        <p>{errors.cvv?.message}</p>
-        <Input
-          type="text"
-          ref={ref}
-          placeholder={userData.cc.owner || "Titular"}
-          size="large"
-          {...register("owner")}
-        />
-        <p>{errors.owner?.message}</p>
-      </div>
+
+      <Text weigth="medium" size="small">
+        Endereço
+      </Text>
+      <Input
+        type="text"
+        ref={ref}
+        placeholder={userData.address.road || "Endereço"}
+        size="large"
+        {...register("road")}
+      />
+      <p>{errors.address?.message}</p>
+      <Input
+        type="text"
+        ref={ref}
+        placeholder={userData.address.number || "Número"}
+        size="large"
+        {...register("number")}
+      />
+      <p>{errors.number?.message}</p>
+      <Input
+        type="text"
+        ref={ref}
+        placeholder={userData.address.city || "Cidade"}
+        size="large"
+        {...register("city")}
+      />
+      <p>{errors.city?.message}</p>
+      <Input
+        type="text"
+        ref={ref}
+        placeholder={userData.address.state || "Estado"}
+        size="large"
+        {...register("state")}
+      />
+      <p>{errors.state?.message}</p>
+      <Input
+        type="text"
+        ref={ref}
+        placeholder={userData.address.cep || "CEP"}
+        size="large"
+        {...register("cep")}
+      />
+      <p>{errors.cep?.message}</p>
+
+      <Text className="subtitle" weigth="medium" size="small">
+        Dados do Cartão
+      </Text>
+      <Input
+        ref={ref}
+        type="number"
+        placeholder={
+          // `XXXX XXXX XXXX ${userData.cc.cc_number.slice(-4)}` ||
+          "Número"
+        }
+        size="large"
+        {...register("cc_number")}
+      />
+      <p>{errors.cc_number?.message}</p>
+      <Input
+        type="text"
+        ref={ref}
+        placeholder={userData.cc.expiration || "Validade"}
+        size="large"
+        {...register("expiration")}
+      />
+      <p>{errors.expiration?.message}</p>
+      <Input
+        type="number"
+        ref={ref}
+        placeholder={userData.cc.cvv || "CVV"}
+        size="large"
+        {...register("cvv")}
+      />
+      <p>{errors.cvv?.message}</p>
+      <Input
+        type="text"
+        ref={ref}
+        placeholder={userData.cc.owner || "Titular"}
+        size="large"
+        {...register("owner")}
+      />
+      <p>{errors.owner?.message}</p>
+
       <Button type="submit" color="primary" size="small">
         Atualizar
       </Button>
