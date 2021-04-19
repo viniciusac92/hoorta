@@ -17,6 +17,10 @@ const StyledContainer = styled.div`
     }
   }
 
+  div {
+    margin-bottom: 3rem;
+  }
+
   form {
     display: flex;
     flex-direction: column;

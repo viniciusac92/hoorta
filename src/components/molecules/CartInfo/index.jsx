@@ -22,8 +22,8 @@ const CartInfo = ({ deliveryPrice = 0, purchases, finishPurchase }) => {
           <input
             type="radio"
             name="deliveryType"
-            checked
-            onClick={() => setDeliveryPrice(deliveryPrice)}
+            defaultChecked
+            onChange={() => setDeliveryPrice(deliveryPrice)}
           />
           <span>Eu quero receber em minha casa</span>
         </CardInfoStyled.InputWrap>
@@ -32,7 +32,7 @@ const CartInfo = ({ deliveryPrice = 0, purchases, finishPurchase }) => {
           <input
             type="radio"
             name="deliveryType"
-            onClick={() => setDeliveryPrice("0")}
+            onChange={() => setDeliveryPrice("0")}
           />
           <span>Eu quero ir até lá buscar</span>
         </CardInfoStyled.InputWrap>
