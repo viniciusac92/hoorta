@@ -16,7 +16,7 @@ import Button from "../../atoms/Button";
 import Text from "../../atoms/Text";
 import { StyledForm } from "./styles";
 
-const FormUpdateUser = () => {
+const FormUpdateUser = ({ toggleModal }) => {
   const ref = createRef();
   const { userData, setUserData } = useData();
   const {
@@ -56,6 +56,9 @@ const FormUpdateUser = () => {
       });
       setUserData(response.data);
       reset();
+      setTimeout(() => {
+        toggleModal();
+      }, 800);
     } catch (e) {
       console.log(e);
     }

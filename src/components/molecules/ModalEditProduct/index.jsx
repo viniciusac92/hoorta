@@ -37,6 +37,7 @@ const ModalEditProduct = ({
         </TextHeader>
       </div>
       <FormUpdateProduct
+        toggleModal={toggleModal}
         currentProductId={currentProductId}
         currentStoreId={currentStoreId}
         productName={productName}
