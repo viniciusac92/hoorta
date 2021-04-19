@@ -3,11 +3,11 @@ import theme from "../../../styles/theme";
 import card_placeholder from "../../../assets/images/card_placeholder.png";
 
 const CardStyled = styled.div`
+  width: 100%;
   height: 268px;
-  width: 59vw;
   margin: 20px;
   border-radius: ${theme.radius};
-  background-position: center;
+  background-position: left;
   background-size: cover;
   background-image: url(${card_placeholder});
   overflow: hidden;
@@ -20,8 +20,9 @@ const CardStyled = styled.div`
 
 CardStyled.Background = styled.div`
   background-color: #09b44dc7;
+  background-size: contain;
   width: 100%;
-  height: 100%;
+  height: 268px;
 `;
 
 CardStyled.Container = styled.div`
@@ -31,6 +32,11 @@ CardStyled.Container = styled.div`
 CardStyled.Image = styled.img`
   height: 279px;
   width: 179px;
+`;
+
+CardStyled.Icon = styled.div`
+  float: right;
+  margin-top: -55px;
 `;
 
 export default CardStyled;

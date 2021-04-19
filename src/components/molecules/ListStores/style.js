@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const List = styled.div`
-  margin: auto;
   max-width: 1000px;
   > div > p {
     text-align: left;

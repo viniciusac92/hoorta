@@ -9,7 +9,6 @@ export const StyledModal = styled.div`
   transform: translate(-50%, -50%);
 
   width: 80%;
-
   position: absolute;
   display: flex;
   flex-direction: column;

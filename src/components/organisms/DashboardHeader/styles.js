@@ -11,5 +11,6 @@ export const HeaderContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 90vw;
+    margin: 2rem 0 2rem 7vw;
   }
 `;

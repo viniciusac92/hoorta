@@ -1,9 +1,15 @@
 import CardInfoStyled from "./style";
 import TextHeader from "../../atoms/TextHeader";
 import Button from "../../atoms/Button";
+import { useHistory } from "react-router-dom";
+import { useState } from "react";
+import ModalCart from "../ModalCart";
 
-const CartInfo = ({ deliveryPrice = 0, purchases = [] }) => {
-  const purchasesPrice = purchases.map(({ info }) => info.price);
+const CartInfo = ({ deliveryPrice = 0, purchases, finishPurchase }) => {
+  const purchasesPrice =
+    purchases && purchases.map(({ info }) => info.price * info.amount);
+  const history = useHistory();
+  const [deliveryPriceInput, setDeliveryPrice] = useState(deliveryPrice);
 
   return (
     <CardInfoStyled>
@@ -13,41 +19,51 @@ const CartInfo = ({ deliveryPrice = 0, purchases = [] }) => {
         </TextHeader>
 
         <CardInfoStyled.InputWrap>
-          <input type="radio" name="deliveryType" checked />
+          <input
+            type="radio"
+            name="deliveryType"
+            checked
+            onClick={() => setDeliveryPrice(deliveryPrice)}
+          />
           <span>Eu quero receber em minha casa</span>
         </CardInfoStyled.InputWrap>
 
         <CardInfoStyled.InputWrap>
-          <input type="radio" name="deliveryType" />
+          <input
+            type="radio"
+            name="deliveryType"
+            onClick={() => setDeliveryPrice("0")}
+          />
           <span>Eu quero ir até lá buscar</span>
         </CardInfoStyled.InputWrap>
 
         <CardInfoStyled.TextWrap>
           <TextHeader>Delivery</TextHeader>
-          <TextHeader>R$ {deliveryPrice}</TextHeader>
+          <TextHeader>R$ {deliveryPriceInput}</TextHeader>
         </CardInfoStyled.TextWrap>
 
         <CardInfoStyled.TextWrap>
-          <TextHeader>Compras</TextHeader>
-          {purchasesPrice.map((price = 0, key) => (
-            <TextHeader key={key}>R$ {price}</TextHeader>
-          ))}
+          <TextHeader>Compras</TextHeader> R${" "}
+          {purchasesPrice && purchasesPrice.reduce((acc, cur) => acc + cur, 0)}
         </CardInfoStyled.TextWrap>
 
         <CardInfoStyled.TextWrap>
           <TextHeader>Total</TextHeader>
           <TextHeader>
             R${" "}
-            {purchasesPrice.reduce((acc, cur) => acc + cur, 0) +
-              Number(deliveryPrice)}
+            {purchasesPrice &&
+              purchasesPrice.reduce((acc, cur) => acc + cur, 0) +
+                Number(deliveryPriceInput)}
           </TextHeader>
         </CardInfoStyled.TextWrap>
       </CardInfoStyled.Wrap>
       <CardInfoStyled.Wrap>
-        <Button color="primary" size="medium">
-          Finalizar compra
-        </Button>
-        <Button color="secondary" size="medium">
+        <ModalCart />
+        <Button
+          color="secondary"
+          size="medium"
+          onClick={() => history.push("/dashboard")}
+        >
           Continuar comprando
         </Button>
       </CardInfoStyled.Wrap>

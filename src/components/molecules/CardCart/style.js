@@ -10,10 +10,11 @@ const CardCartStyled = styled.div`
   box-shadow: ${theme.shadow.under};
   display: flex;
   justify-content: space-around;
-  margin: 0 auto;
+  margin: 20px auto;
 
-  @media screen and (min-width: 768px) {
-    width: 50%;
+  @media screen and (min-width: 1470px) {
+    width: 100%;
+    margin: 0;
   }
 `;
 
@@ -26,6 +27,8 @@ CardCartStyled.Wrap = styled.div`
 CardCartStyled.Amount = styled.p`
   font-size: 48px;
   font-weight: ${theme.weight.regular};
+  min-width: 80px;
+  margin: 20px;
 `;
 
 CardCartStyled.Text = styled.p`

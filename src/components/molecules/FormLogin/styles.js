@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "../../../styles/theme";
+import Snackbar from "@material-ui/core/Snackbar";
 
 const FormStyled = styled.form`
   display: flex;
@@ -30,6 +31,21 @@ FormStyled.Text = styled.div`
 FormStyled.Container = styled.div`
   text-align: center;
   max-width: 550px;
+  height: 440px;
+`;
+
+FormStyled.Snackbar = styled(Snackbar)`
+  top: -558px !important;
+  left: 279px !important;
+  z-index: -1 !important;
+
+  .MuiPaper-root {
+    background-color: ${theme.color.primary};
+  }
+
+  .MuiSnackbarContent-root {
+    justify-content: center !important;
+  }
 `;
 
 export default FormStyled;

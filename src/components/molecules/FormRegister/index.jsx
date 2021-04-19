@@ -1,5 +1,5 @@
 // React
-import { createRef, useState } from "react";
+import { createRef, useEffect, useState, useRef } from "react";
 // API
 import API from "../../../services/api";
 // Helpers
@@ -22,6 +22,8 @@ const FormRegister = () => {
   const ref = createRef();
   const [error, setError] = useState(null);
   const history = useHistory();
+  const [snackOpen, setSnackOpen] = useState(false);
+  const mounted = useRef(false);
   const {
     register,
     handleSubmit,
@@ -30,6 +32,23 @@ const FormRegister = () => {
   } = useForm({
     resolver: yupResolver(registerSchema),
   });
+
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    errors[Object.keys(errors)[0]]?.message && setSnackOpen(true);
+    error && setSnackOpen(true);
+  }, [errors, error]);
+
+  const handleCloseSnack = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackOpen(false);
+  };
 
   const handleForm = async (data) => {
     try {
@@ -44,8 +63,8 @@ const FormRegister = () => {
       reset();
       history.push("/login");
     } catch (e) {
-      console.log(e);
-      if (e.response.data === "Email already exists") {
+      console.log(e.message);
+      if (e.message === "Request failed with status code 400") {
         setError("Email já cadastrado");
       }
     }
@@ -53,7 +72,19 @@ const FormRegister = () => {
 
   return (
     <FormStyled.Container>
-      <FormStyled onSubmit={handleSubmit(handleForm)}>
+      <FormStyled.Snackbar
+        open={snackOpen}
+        autoHideDuration={5000}
+        onClose={handleCloseSnack}
+        message={
+          (errors && errors[Object.keys(errors)[0]]?.message) ||
+          (error && error)
+        }
+      />
+      <FormStyled
+        onSubmit={handleSubmit(handleForm)}
+        onClick={() => setSnackOpen(false)}
+      >
         <Text weigth="semiBold" size="large">
           Registro
         </Text>
@@ -64,7 +95,6 @@ const FormRegister = () => {
           size="large"
           {...register("email")}
         />
-        <p>{errors.email?.message}</p>
         <Input
           ref={ref}
           type="password"
@@ -72,7 +102,6 @@ const FormRegister = () => {
           size="large"
           {...register("password")}
         />
-        <p>{errors.password?.message}</p>
         <Input
           ref={ref}
           type="text"
@@ -80,7 +109,6 @@ const FormRegister = () => {
           size="large"
           {...register("name")}
         />
-        <p>{errors.name?.message}</p>
         <Input
           ref={ref}
           type="number"
@@ -88,8 +116,6 @@ const FormRegister = () => {
           size="large"
           {...register("age")}
         />
-        <p>{errors.age?.message}</p>
-        <p>{error && error}</p>
         <Button type="submit" color="primary" size="large">
           Cadastrar
         </Button>

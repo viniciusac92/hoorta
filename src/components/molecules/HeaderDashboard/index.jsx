@@ -1,4 +1,3 @@
-import Link from "../../atoms/Link";
 import { HeaderContainer, Logout } from "./styles";
 import { useHistory } from "react-router-dom";
 import Icon from "../../atoms/Icon";
@@ -22,8 +21,6 @@ const HeaderDashboard = () => {
           <p>Voltar</p>
         </Logout>
       </div>
-      <Link to="/about">Sobre nós</Link>
-      <Link to="/contact">Contato</Link>
     </HeaderContainer>
   );
 };

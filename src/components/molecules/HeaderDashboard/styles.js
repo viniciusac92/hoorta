@@ -18,8 +18,12 @@ export const HeaderContainer = styled.div`
   }
 
   img {
-    width: 16px;
+    width: 25px;
     padding: 0 10px 0 0;
+  }
+
+  a {
+    font-size: 1.5rem;
   }
 
   @media screen and (max-width: 1308px) {

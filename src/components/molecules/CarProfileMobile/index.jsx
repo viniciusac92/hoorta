@@ -3,11 +3,17 @@ import { CardStyled } from "./styles";
 import Woman from "../../../assets/images/perfil/imgPerfil.jpg";
 import Text from "../../atoms/Text";
 import Icon from "../../atoms/Icon";
+import Left from "../../../assets/images/icons/left.png";
 import IconEdit from "../../../assets/images/icons/editPencil.svg";
 import CardInfoUserProfile from "../../atoms/CardInfoUserProfile";
+import { useHistory } from "react-router-dom";
 
 const CardProfileMobile = () => {
   const { userData } = useData();
+  const history = useHistory();
+  const handleLogout = () => {
+    history.goBack();
+  };
 
   const text = [
     { dice: [userData.address.road, " - ", userData.address.number] },
@@ -20,6 +26,9 @@ const CardProfileMobile = () => {
   return (
     <CardStyled.Container>
       <CardStyled>
+        <CardStyled.Logout onClick={handleLogout}>
+          <Icon src={Left} alt="Botão Voltar" display={["block", "block"]} />
+        </CardStyled.Logout>
         <CardStyled.Background>
           <CardStyled.Title>
             <Text size="mediumPlus" weigth="semiBold">
