@@ -12,6 +12,7 @@ import Cart from "../pages/Cart";
 import Favorites from "../pages/Favorites";
 import Profile from "../pages/Profile";
 import StoreProfile from "../pages/StoreProfile";
+import About from "../pages/About";
 
 const Routes = () => {
   return (
@@ -37,6 +38,8 @@ const Routes = () => {
       <Route exact path="/profile" component={Profile} />
 
       <Route exact path="/tests" component={Tests} />
+
+      <Route exact path="/about" component={About} />
     </Switch>
   );
 };

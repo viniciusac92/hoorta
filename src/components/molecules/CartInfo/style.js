@@ -11,7 +11,7 @@ const CardInfoStyled = styled.div`
   height: 600px;
   margin: 2rem auto;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1470px) {
     margin: 0;
     width: 50%;
   }

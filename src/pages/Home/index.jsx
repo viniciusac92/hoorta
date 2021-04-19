@@ -38,14 +38,14 @@ const Home = () => {
         />
       </Figure>
       <HomeInfo />
-      <Picture
+      {/* <Picture
         image={footerPicture}
         width={["320px", "444px"]}
         height={["155px", "215px"]}
         position={["relative", "absolute"]}
         top={["0px", "calc(100% - 215px)"]}
         left={["-37px"]}
-      />
+      /> */}
     </div>
   );
 };

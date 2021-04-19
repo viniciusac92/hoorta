@@ -10,6 +10,10 @@ export const CardStyled = styled.div`
   background-size: cover;
   overflow: hidden;
   background-position: center;
+
+  @media screen and (max-width: 768px) {
+    height: 28vh;
+  } ;
 `;
 
 CardStyled.Container = styled.div`
@@ -23,7 +27,7 @@ CardStyled.Background = styled.div`
 `;
 
 CardStyled.Title = styled.div`
-  padding-top: 60px;
+  padding-top: 20px;
   text-align: center;
 
   p {
@@ -33,13 +37,17 @@ CardStyled.Title = styled.div`
 
 CardStyled.Image = styled.div`
   text-align: center;
-  margin-top: -105px;
+  margin-top: -100px;
 
   img {
     height: 182px;
     width: 182px;
     border-radius: 100%;
   }
+`;
+
+CardStyled.Logout = styled.div`
+  float: left;
 `;
 
 CardStyled.Container = styled.div``;

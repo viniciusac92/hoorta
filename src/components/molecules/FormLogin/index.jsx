@@ -1,5 +1,5 @@
 // React
-import { createRef, useState } from "react";
+import { createRef, useState, useEffect, useRef } from "react";
 // API
 import API from "../../../services/api";
 // Helpers
@@ -27,6 +27,8 @@ const FormLogin = () => {
   const history = useHistory();
   const { setUserData } = useData();
   const { getAllStores } = useStores();
+  const mounted = useRef(false);
+  const [snackOpen, setSnackOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -35,6 +37,23 @@ const FormLogin = () => {
   } = useForm({
     resolver: yupResolver(loginSchema),
   });
+
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    errors[Object.keys(errors)[0]]?.message && setSnackOpen(true);
+    console.log(errors);
+  }, [errors, error]);
+
+  const handleCloseSnack = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackOpen(false);
+  };
 
   const handleForm = async (data) => {
     try {
@@ -65,6 +84,7 @@ const FormLogin = () => {
 
       reset();
       getAllStores();
+      localStorage.setItem("cart", JSON.stringify([]));
       history.push("/dashboard");
     } catch (e) {
       console.log(e);
@@ -78,7 +98,16 @@ const FormLogin = () => {
 
   return (
     <FormStyled.Container>
-      <FormStyled onSubmit={handleSubmit(handleForm)}>
+      <FormStyled.Snackbar
+        open={snackOpen}
+        autoHideDuration={5000}
+        onClose={handleCloseSnack}
+        message={errors && errors[Object.keys(errors)[0]]?.message}
+      />
+      <FormStyled
+        onSubmit={handleSubmit(handleForm)}
+        onClick={() => setSnackOpen(false)}
+      >
         <Text weigth="semiBold" size="large">
           Login
         </Text>
@@ -89,7 +118,6 @@ const FormLogin = () => {
           size="large"
           {...register("email")}
         />
-        <p>{errors.email?.message}</p>
         <Input
           ref={ref}
           type="password"
@@ -97,12 +125,10 @@ const FormLogin = () => {
           size="large"
           {...register("password")}
         />
-        <p>{errors.password?.message}</p>
-        <p>{error && error}</p>
         <Button type="submit" color="primary" size="large">
           Entrar
         </Button>
-      </FormStyled>{" "}
+      </FormStyled>
       <FormStyled.Text>
         <p onClick={() => history.push("/register")}>
           Não é membro? <span>Registre-se</span>

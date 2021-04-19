@@ -14,7 +14,6 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <FormLogin />
       <Figure type="square">
         <Picture
           image={heartImage}
@@ -25,6 +24,7 @@ const Login = () => {
           position={["relative"]}
         />
       </Figure>
+      <FormLogin />
       <Figure type="rectangle">
         <Picture
           image={vegetablePack}

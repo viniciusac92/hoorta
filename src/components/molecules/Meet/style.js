@@ -4,6 +4,7 @@ const MeetStyled = styled.div`
   margin: 50px auto;
   text-align: center;
   width: 100%;
+  height: 370px;
 
   @media screen and (min-width: 780px) {
     width: 550px;

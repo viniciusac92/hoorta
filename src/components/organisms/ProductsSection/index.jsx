@@ -1,5 +1,4 @@
 import Picture from "../../atoms/Picture";
-import ProductCard from "../../atoms/ProductCard";
 import TextProduct from "../../atoms/TextProduct";
 import {
   ProductsListStyled,
@@ -7,25 +6,25 @@ import {
   BottomContainerStyled,
   ContainerInfoStyled,
   TopContainerStyled,
+  ProductCardStyled,
+  ButtonCountStyled,
+  SnackBar,
 } from "./styles";
 import organic from "../../../assets/images/organic/organic.png";
-import alface from "../../../assets/images/products/alface.jpg";
-import TomateCereja from "../../../assets/images/products/tomateCereja.jpg";
-import Abobora from "../../../assets/images/products/abobora.jpg";
-import threeDots from "../../../assets/images/icons/threeDots.svg";
+import DefaultProductImage from "../../../assets/images/products/DefaultProductImage.jpg";
 import Button from "../../atoms/Button";
-import ButtonCount from "../../molecules/ButtonCount";
 import Link from "../../atoms/Link";
 import ModalCreateProduct from "../ModalCreateProduct";
+import ModalEditStore from "../ModalEditStore";
 import { useState } from "react";
 import { useData } from "../../../providers/UserContext";
 import { useStores } from "../../../providers/StoresContext";
-import Icon from "../../atoms/Icon";
+import MenuEditDelete from "../MenuEditDelete";
+import { useEffect } from "react";
 
 const ProductsSection = ({ productsData, currentStoreId }) => {
-  const productImg = [{ img: alface }, { img: TomateCereja }, { img: Abobora }];
   const [amountOfProduct, setAmountOfProduct] = useState(1);
-
+  const [snackOpen, setSnackOpen] = useState(false);
   const { checkOwner } = useData();
   const { storeData } = useStores();
 
@@ -46,11 +45,26 @@ const ProductsSection = ({ productsData, currentStoreId }) => {
     setAmountOfProduct(1);
   };
 
+  useEffect(() => {
+    setTimeout(() => setSnackOpen(false), 3000);
+  }, [snackOpen]);
+
   return (
     <ProductsListStyled>
+      <SnackBar
+        open={snackOpen}
+        onClose={!snackOpen}
+        message="Produto Adicionado ao carrinho!"
+      />
       <div>
+        {checkOwner(currentStoreId) && (
+          <div className="iconPlus">
+            <ModalCreateProduct currentStoreId={currentStoreId} />
+            <ModalEditStore currentStoreId={currentStoreId} />
+          </div>
+        )}
         <TextProduct size={"large"} color={"black"}>
-          Nome da loja - Produtor
+          {storeData?.businessName}
         </TextProduct>
         <Link
           size={"large"}
@@ -60,59 +74,73 @@ const ProductsSection = ({ productsData, currentStoreId }) => {
           Conheça mais sobre o produtor
         </Link>
       </div>
-      <div>
-        <ModalCreateProduct currentStoreId={currentStoreId} />
-      </div>
 
       {productsData &&
         productsData.map((product, index) => (
-          <ProductCard size={"large"} key={index}>
+          <ProductCardStyled size={"large"} key={index}>
+            <Picture
+              image={DefaultProductImage}
+              width={["61px", "58px"]}
+              height={["61px", "65px"]}
+              top={[""]}
+              left={[""]}
+              position={["relative"]}
+            />
             <ContainerInfoStyled>
-              <div>
-                <TopContainerStyled>
-                  <TitleDivStyled>
-                    <TextProduct
-                      weigth={"semiBold"}
-                      size={"large"}
-                      color={"primary"}
-                    >
-                      {product.info.name}
-                    </TextProduct>
-                    <Picture
-                      image={organic}
-                      width={["15px", "58px"]}
-                      height={["15px", "65px"]}
-                      top={["20px"]}
-                      left={["85px"]}
-                      position={["relative"]}
-                    />
-                  </TitleDivStyled>
-                  <Icon src={threeDots} display={["block", "none"]} />
-                </TopContainerStyled>
-                <TextProduct size={"medium"} color={"black"}>
-                  {product.info.description}
-                </TextProduct>
+              <TopContainerStyled>
+                <TitleDivStyled>
+                  <TextProduct
+                    weigth={"semiBold"}
+                    size={"large"}
+                    color={"primary"}
+                  >
+                    {product.info.name}
+                  </TextProduct>
+                  <Picture
+                    image={organic}
+                    width={["", ""]}
+                    height={["", ""]}
+                    top={[""]}
+                    left={[""]}
+                    position={["relative"]}
+                  />
+                </TitleDivStyled>
+                {checkOwner(currentStoreId) && (
+                  <MenuEditDelete
+                    currentProductId={product.id}
+                    currentStoreId={currentStoreId}
+                    productName={product.info.name}
+                    productPrice={product.info.price}
+                    productDescription={product.info.description}
+                  />
+                )}
+              </TopContainerStyled>
+              <TextProduct size={"medium"} color={"black"}>
+                {product.info.description}
+              </TextProduct>
+              <BottomContainerStyled>
                 <TextProduct weigth={"semiBold"}>
                   R$ {product.info.price}
                 </TextProduct>
-              </div>
-              <BottomContainerStyled>
-                <ButtonCount
+                <ButtonCountStyled
                   amountOfProduct={amountOfProduct}
                   setAmountOfProduct={setAmountOfProduct}
                 >
                   {amountOfProduct}
-                </ButtonCount>
+                </ButtonCountStyled>
                 <Button
                   color={"primary"}
-                  onClick={() => addCart(product)}
-                  size="medium"
+                  onClick={() => {
+                    addCart(product);
+                    setSnackOpen(true);
+                  }}
+                  size={"small"}
                 >
                   Adicionar
                 </Button>
               </BottomContainerStyled>
             </ContainerInfoStyled>
-          </ProductCard>
+          </ProductCardStyled>
         ))}
     </ProductsListStyled>
   );

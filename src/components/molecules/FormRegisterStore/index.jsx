@@ -4,13 +4,14 @@ import { createRef, useState } from "react";
 import API from "../../../services/api";
 //ContextAPI
 import { useData } from "../../../providers/UserContext";
+import { useStores } from "../../../providers/StoresContext";
 //Dependencias
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useHistory } from "react-router";
 //Helpers
 import { registerStoreSchema } from "../../../helper/FormValidation";
-import { postStore } from "../../../helper/stores";
+import { postStore, getUserStore } from "../../../helper/stores";
 import { patchUser } from "../../../helper/user";
 //Components
 import Input from "../../atoms/Input";
@@ -22,7 +23,8 @@ const FormRegisterStore = () => {
     return JSON.parse(sessionToken);
   });
   const history = useHistory();
-  const { userData } = useData();
+  const { userData, setUserData } = useData();
+  const { getAllStores } = useStores();
 
   const ref = createRef();
   const {
@@ -41,13 +43,25 @@ const FormRegisterStore = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      await API.patch(
+      const response = await API.patch(
         patchUser(userData.id),
         { productor: true },
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+
+      const storeResponse = await API.get(getUserStore(userData.id), {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
+      });
+
+      const userStoreData = storeResponse.data[0];
+
+      setUserData({ ...response.data, storeId: userStoreData.id });
+
+      getAllStores();
       reset();
       history.push("/profile");
     } catch (e) {

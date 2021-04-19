@@ -6,6 +6,12 @@ export const StyledForm = styled.form`
     width: 100%;
   }
 
+  textarea {
+    margin: 8px 0;
+    width: 100%;
+    height: 60px;
+  }
+
   button {
     margin-top: 20px;
     width: 100%;

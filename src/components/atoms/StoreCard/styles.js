@@ -22,7 +22,7 @@ export const CardContainer = styled.div`
     text-decoration: none;
   }
 
-  @media screen and (min-width: 800px) {
+  @media (min-width: 800px) {
     height: 340px;
 
     max-width: 1000px;

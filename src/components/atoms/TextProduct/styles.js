@@ -24,7 +24,7 @@ export const TextProductStyled = styled.p`
 
 	@media screen and (min-width: 800px) {
 		font-size: ${({size}) =>
-			size === "large" ? "2.7rem" : size === "medium" ? "1.2rem" : null};
+			size === "large" ? "3vh" : size === "medium" ? "1.2rem" : null};
 		margin: 2rem 0rem 1.5rem 0rem;
 	}
 `;
