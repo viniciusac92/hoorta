@@ -30,14 +30,14 @@ const CardProfileMobile = () => {
         <CardStyled.Logout onClick={handleLogout}>
           <Icon src={Left} alt="Botão Voltar" display={["block", "block"]} />
         </CardStyled.Logout>
+        <CardStyled.Icon>
+          <ModalUser />
+        </CardStyled.Icon>
         <CardStyled.Background>
           <CardStyled.Title>
             <Text size="mediumPlus" weigth="semiBold">
               {userData.name} - {userData.age}
             </Text>
-            <CardStyled.Icon>
-              <ModalUser />
-            </CardStyled.Icon>
           </CardStyled.Title>
         </CardStyled.Background>
       </CardStyled>

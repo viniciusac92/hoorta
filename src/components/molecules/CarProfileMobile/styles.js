@@ -48,7 +48,6 @@ CardStyled.Image = styled.div`
 
 CardStyled.Icon = styled.div`
   float: right;
-  margin-top: -55px;
 
   img {
     max-width: 20px;
