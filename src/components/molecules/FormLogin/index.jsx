@@ -26,7 +26,7 @@ const FormLogin = () => {
   const [error, setError] = useState(null);
   const history = useHistory();
   const { setUserData } = useData();
-  const { getAllStores } = useStores();
+  const { getAllStores, setStoreData } = useStores();
   const mounted = useRef(false);
   const [snackOpen, setSnackOpen] = useState(false);
   const {
@@ -78,6 +78,7 @@ const FormLogin = () => {
         const userStoreData = storeResponse.data[0];
 
         setUserData({ ...userInfo.data, storeId: userStoreData.id });
+        setStoreData(userStoreData);
       } else {
         setUserData({ ...userInfo.data });
       }
