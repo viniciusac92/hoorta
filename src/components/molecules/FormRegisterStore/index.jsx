@@ -1,5 +1,5 @@
 //React
-import { createRef, useState } from "react";
+import { createRef, useState, useRef, useEffect } from "react";
 //API
 import API from "../../../services/api";
 //ContextAPI
@@ -16,6 +16,8 @@ import { patchUser } from "../../../helper/user";
 //Components
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
+import { SnackbarStyled } from "./style";
+import TextArea from "../../atoms/TextArea";
 
 const FormRegisterStore = () => {
   const [token] = useState(() => {
@@ -25,6 +27,7 @@ const FormRegisterStore = () => {
   const history = useHistory();
   const { userData, setUserData } = useData();
   const { getAllStores } = useStores();
+  const mounted = useRef(false);
 
   const ref = createRef();
   const {
@@ -33,6 +36,15 @@ const FormRegisterStore = () => {
     formState: { errors },
     reset,
   } = useForm({ resolver: yupResolver(registerStoreSchema) });
+  const [snackOpen, setSnackOpen] = useState(false);
+
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    errors[Object.keys(errors)[0]]?.message && setSnackOpen(true);
+  }, [errors]);
 
   const handleForm = async (data) => {
     try {
@@ -69,8 +81,22 @@ const FormRegisterStore = () => {
     }
   };
 
+  const handleCloseSnack = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackOpen(false);
+  };
+
   return (
     <form onSubmit={handleSubmit(handleForm)}>
+      <SnackbarStyled
+        open={snackOpen}
+        autoHideDuration={5000}
+        onClose={handleCloseSnack}
+        message={errors && errors[Object.keys(errors)[0]]?.message}
+      />
       <Input
         ref={ref}
         type="text"
@@ -78,7 +104,6 @@ const FormRegisterStore = () => {
         size="large"
         {...register("businessName")}
       />
-      <p>{errors.businessName?.message}</p>
       <Input
         ref={ref}
         type="text"
@@ -86,7 +111,6 @@ const FormRegisterStore = () => {
         size="large"
         {...register("registeredName")}
       />
-      <p>{errors.registeredName?.message}</p>
       <Input
         ref={ref}
         type="text"
@@ -94,15 +118,13 @@ const FormRegisterStore = () => {
         size="large"
         {...register("cnpj")}
       />
-      <p>{errors.cnpj?.message}</p>
-      <Input
+      <TextArea
         ref={ref}
         type="text"
         placeholder="Descreva sua loja!"
         size="large"
         {...register("description")}
       />
-      <p>{errors.description?.message}</p>
       <Button type="submit" color="primary" size="large">
         Cadastrar
       </Button>
