@@ -78,15 +78,15 @@ export const updateUserSchema = yup.object().shape({
 });
 
 export const registerStoreSchema = yup.object().shape({
-  businessName: yup.string().required(required),
-  registeredName: yup.string().required(required),
+  businessName: yup.string().required(`Nome da Loja ${required}`),
+  registeredName: yup.string().required(`Razão Social ${required}`),
   cnpj: yup
     .string()
     .matches(CNPJ_REGEX, {
       message: "Número inválido, formato requerido: XX.XXX.XXX/0001-XX",
     })
-    .required(required),
-  description: yup.string().required(required),
+    .required(`CNPJ ${required}`),
+  description: yup.string().required(`Descrição é ${required}`),
 });
 
 export const updateStoreSchema = yup.object().shape({

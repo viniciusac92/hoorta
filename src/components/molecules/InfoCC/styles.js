@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const InfosCCStyled = styled.div`
+  div {
+    height: auto;
+  }
   p {
     font-size: 20px;
     padding: 12px 34px;

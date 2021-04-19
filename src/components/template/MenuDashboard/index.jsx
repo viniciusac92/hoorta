@@ -15,10 +15,7 @@ const MenuDashboard = ({ children, id }) => {
   });
 
   const show2 = () => {
-    if (
-      (isDesktop2 && location === "/profile") ||
-      (isDesktop2 && location === `/store/profile/${id}`)
-    ) {
+    if (isDesktop2 && location === "/profile") {
       return false;
     } else {
       return true;

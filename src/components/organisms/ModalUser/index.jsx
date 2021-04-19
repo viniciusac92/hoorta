@@ -15,14 +15,14 @@ const ModalUser = () => {
   const body = (
     <StyledModal>
       <div className="headerContainer">
-        <TextHeader color="primary" size="medium" fontWeight="medium">
-          Atualizar Dados
-        </TextHeader>
         <EditButton onClick={toggleModal}>
           <Icon src={Close} alt="Botão Fechar" display={["block", "block"]} />
         </EditButton>
+        <TextHeader color="primary" size="medium" fontWeight="medium">
+          Atualizar Dados
+        </TextHeader>
       </div>
-      <FormUpdateUser toggleModal={toggleModal} />
+      <FormUpdateUser />
     </StyledModal>
   );
 

@@ -46,6 +46,14 @@ CardStyled.Image = styled.div`
   }
 `;
 
+CardStyled.Icon = styled.div`
+  float: right;
+
+  img {
+    max-width: 20px;
+  }
+`;
+
 CardStyled.Logout = styled.div`
   float: left;
 `;
