@@ -22,7 +22,10 @@ const ModalEditStore = ({ currentStoreId }) => {
           Editar Loja
         </TextHeader>
       </div>
-      <FormEditStore currentStoreId={currentStoreId} />
+      <FormEditStore
+        toggleModal={toggleModal}
+        currentStoreId={currentStoreId}
+      />
     </StyledModal>
   );
 

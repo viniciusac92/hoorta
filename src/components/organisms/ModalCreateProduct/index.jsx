@@ -22,7 +22,10 @@ const ModalCreateProduct = ({ currentStoreId }) => {
           <Icon src={Close} alt="Botão Fechar" display={["block", "block"]} />
         </EditButton>
       </div>
-      <FormRegisterProduct currentStoreId={currentStoreId} />
+      <FormRegisterProduct
+        toggleModal={toggleModal}
+        currentStoreId={currentStoreId}
+      />
     </StyledModal>
   );
 

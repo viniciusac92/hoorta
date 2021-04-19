@@ -17,7 +17,7 @@ import Button from "../../atoms/Button";
 import { StyledForm } from "./styles";
 import Input from "../../atoms/Input";
 
-const FormRegisterProduct = ({ currentStoreId }) => {
+const FormRegisterProduct = ({ currentStoreId, toggleModal }) => {
   const { userData } = useData();
   const { productsData, setProductsData } = useProducts();
   const ref = createRef();
@@ -48,6 +48,9 @@ const FormRegisterProduct = ({ currentStoreId }) => {
       console.log(response.data);
       setProductsData([...productsData, response.data]);
       reset();
+      setTimeout(() => {
+        toggleModal();
+      }, 800);
     } catch (e) {
       console.log(e);
     }

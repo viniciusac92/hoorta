@@ -19,7 +19,7 @@ import Button from "../../atoms/Button";
 import { useStores } from "../../../providers/StoresContext";
 import { FormStyled } from "./style";
 
-const FormEditStore = ({ currentStoreId }) => {
+const FormEditStore = ({ currentStoreId, toggleModal }) => {
   const [token] = useState(() => {
     const sessionToken = localStorage.getItem("token") || "";
     return JSON.parse(sessionToken);
@@ -54,6 +54,9 @@ const FormEditStore = ({ currentStoreId }) => {
 
       setStoreData(response.data);
       reset();
+      setTimeout(() => {
+        toggleModal();
+      }, 800);
     } catch (e) {
       console.log(e);
     }
