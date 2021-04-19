@@ -35,7 +35,8 @@ const Cart = () => {
 
   return (
     <div>
-      {cartProducts !== [] ? (
+      {console.log(cartProducts.length)}
+      {cartProducts.length > 0 ? (
         <MenuDashboard>
           <CartContainer>
             <CardWrap>

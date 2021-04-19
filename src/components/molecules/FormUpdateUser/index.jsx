@@ -4,6 +4,7 @@ import { createRef } from "react";
 import API from "../../../services/api";
 // Helpers
 import { patchUser } from "../../../helper/user";
+import { getUserStore } from "../../../helper/stores";
 import { updateUserSchema } from "../../../helper/FormValidation";
 // Dependencies
 import { useForm } from "react-hook-form";
@@ -16,7 +17,7 @@ import Button from "../../atoms/Button";
 import Text from "../../atoms/Text";
 import { StyledForm } from "./styles";
 
-const FormUpdateUser = () => {
+const FormUpdateUser = ({ toggleModal }) => {
   const ref = createRef();
   const { userData, setUserData } = useData();
   const {
@@ -54,8 +55,20 @@ const FormUpdateUser = () => {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       });
-      setUserData(response.data);
+
+      const storeResponse = await API.get(getUserStore(userData.id), {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
+      });
+
+      const userStoreData = storeResponse.data[0];
+
+      setUserData({ ...response.data, storeId: userStoreData.id });
       reset();
+      setTimeout(() => {
+        toggleModal();
+      }, 800);
     } catch (e) {
       console.log(e);
     }
@@ -70,14 +83,14 @@ const FormUpdateUser = () => {
         {...register("name")}
       />
       <p>{errors.name?.message}</p>
-      <Input
+      {/* <Input
         type="text"
         ref={ref}
         placeholder={userData.age || "Age"}
         size="large"
         {...register("age")}
       />
-      <p>{errors.age?.message}</p>
+      <p>{errors.age?.message}</p> */}
       <Input
         type="text"
         ref={ref}

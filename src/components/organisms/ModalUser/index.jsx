@@ -22,7 +22,7 @@ const ModalUser = () => {
           Atualizar Dados
         </TextHeader>
       </div>
-      <FormUpdateUser />
+      <FormUpdateUser toggleModal={toggleModal} />
     </StyledModal>
   );
 

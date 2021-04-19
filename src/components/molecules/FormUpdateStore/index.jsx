@@ -11,7 +11,13 @@ import Input from "../../atoms/Input";
 
 const FormUpdateStore = () => {
   const ref = createRef();
-  const { userStore, setUserStore } = useStores();
+  const {
+    setStoreData,
+    listStores,
+    setListStores,
+    storeData,
+    getAllStores,
+  } = useStores();
   const {
     register,
     handleSubmit,
@@ -22,8 +28,8 @@ const FormUpdateStore = () => {
   const handleForm = async (data) => {
     const { businessName, description } = data;
     const defaultData = {
-      businessName: businessName || userStore.businessName,
-      description: description || userStore.description,
+      businessName: businessName || storeData.businessName,
+      description: description || storeData.description,
     };
     try {
       const response = await API.patch(patchStore(1), defaultData, {
@@ -31,7 +37,11 @@ const FormUpdateStore = () => {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
         },
       });
-      setUserStore(response.data);
+
+      getAllStores();
+      setStoreData(response.data);
+      console.log(listStores);
+
       reset();
     } catch (e) {
       console.log(e);
