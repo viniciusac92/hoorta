@@ -51,7 +51,7 @@ export const updateUserSchema = yup.object().shape({
     message: "Número inválido, formato requerido: (XX) 9XXXX-XXXX",
     excludeEmptyString: true,
   }),
-  age: yup.number().min(18, "Mínimo 18 anos").required(`Idade ${required}`),
+  // age: yup.number().min(18, "Mínimo 18 anos").required(`Idade ${required}`),
   road: yup.string(),
   number: yup.string().max(4, "Máximo de 4 dígitos"),
   city: yup.string(),
